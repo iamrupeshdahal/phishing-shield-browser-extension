@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Privacy Shield</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      width: 300px;
+      padding: 12px;
+      background-color: #ffffff;
+    }
+
+    .status-box {
+      background-color: #e6f4ea;
+      color: #1b5e20;
+      padding: 12px;
+      border-radius: 8px;
+      font-weight: bold;
+      text-align: center;
+      margin-bottom: 15px;
+    }
+
+    .section {
+      margin-bottom: 10px;
+    }
+
+    .section label {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 14px;
+      margin: 8px 0;
+    }
+
+    .section select,
+    .section input[type="checkbox"] {
+      margin-left: 8px;
+    }
+
+    .subtext {
+      font-size: 12px;
+      color: #666;
+      margin-top: 5px;
+    }
+
+    .footer {
+      display: flex;
+      justify-content: space-between;
+      font-size: 12px;
+      margin-top: 15px;
+    }
+
+    .footer a {
+      color: #0066cc;
+      text-decoration: none;
+    }
+
+    .header {
+      font-size: 16px;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
+    hr {
+      border: none;
+      border-top: 1px solid #ccc;
+      margin: 10px 0;
+    }
+  </style>
+</head>
+<body>
+  <div class="status-box"><span style="font-size: 18px;">&#x1F6E1;</span>Privacy Shield is ACTIVE</div>
+
+    <div id="current-url" style="font-size: 13px; color: #444; margin-bottom: 10px;">
+    Loading current URL...
+    </div>
+
+  <div class="header">Site Controls</div>
+
+  <div class="section">
+    <label>
+      Ad Blocker:
+      <select id="ad-block">
+        <option value="enabled">Enabled</option>
+        <option value="disabled">Disabled</option>
+      </select>
+    </label>
+
+    <label>
+      Phishing Protection:
+      <select id="phishing">
+        <option value="enabled">Enabled</option>
+        <option value="disabled">Disabled</option>
+      </select>
+    </label>
+
+    <label>
+      Script Blocking:
+      <input type="checkbox" id="block-scripts" checked>
+    </label>
+
+    <label>
+      Third-party Cookie Block:
+      <select id="cookies">
+        <option value="enabled">Enabled</option>
+        <option value="disabled">Disabled</option>
+      </select>
+    </label>
+
+    <label>
+      Auto Forget This Site:
+      <input type="checkbox" id="forget-site">
+    </label>
+
+    <hr>
+
+    <label>
+      Fingerprint Shield:
+      <input type="checkbox" id="fingerprint" checked>
+    </label>
+
+    <label>
+      Upgrade to HTTPS:
+      <select id="https">
+        <option value="enabled">Enabled</option>
+        <option value="disabled">Disabled</option>
+      </select>
+    </label>
+  </div>
+
+  <div class="subtext">*Changing these settings may affect site functionality.</div>
+
+  <div class="footer">
+    <a href="#">Manage Filters</a>
+    <a href="#">Default Settings</a>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>
