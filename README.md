@@ -88,4 +88,12 @@ It delivers measurable blocking results, highlights the benefits of combining ru
 
 ---
 
-## 📂 Repository Structure
+
+---
+
+## 🔗 Resources
+- 📖 [Capstone Showcase Page](https://rupeshdahal.com/extension/)  
+- 💻 [GitHub Repository](https://github.com/rupeshdahal/extension-project)  
+
+---
+
