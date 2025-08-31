@@ -1,0 +1,122 @@
+[
+  {
+    "id": 20001,
+    "priority": 1,
+    "action": { "type": "block" },
+    "condition": { "urlFilter": "googletagmanager.com", "resourceTypes": ["script","xmlhttprequest","sub_frame","other"] }
+  },
+  {
+    "id": 20002,
+    "priority": 1,
+    "action": { "type": "block" },
+    "condition": { "urlFilter": "google-analytics.com", "resourceTypes": ["script","xmlhttprequest","sub_frame","other"] }
+  },
+  {
+    "id": 20003,
+    "priority": 1,
+    "action": { "type": "block" },
+    "condition": { "urlFilter": "stats.g.doubleclick.net", "resourceTypes": ["script","image","xmlhttprequest","ping"] }
+  },
+  {
+    "id": 20004,
+    "priority": 1,
+    "action": { "type": "block" },
+    "condition": { "urlFilter": "chartbeat.com", "resourceTypes": ["script","xmlhttprequest","sub_frame","other"] }
+  },
+  {
+    "id": 20005,
+    "priority": 1,
+    "action": { "type": "block" },
+    "condition": { "urlFilter": "optimizely.com", "resourceTypes": ["script","xmlhttprequest"] }
+  },
+  {
+    "id": 20006,
+    "priority": 1,
+    "action": { "type": "block" },
+    "condition": { "urlFilter": "parsely.com", "resourceTypes": ["script","xmlhttprequest"] }
+  },
+  {
+    "id": 20007,
+    "priority": 1,
+    "action": { "type": "block" },
+    "condition": { "urlFilter": "demdex.net", "resourceTypes": ["script","xmlhttprequest"] }
+  },
+  {
+    "id": 20008,
+    "priority": 1,
+    "action": { "type": "block" },
+    "condition": { "urlFilter": "adsrvr.org", "resourceTypes": ["script","xmlhttprequest"] }
+  },
+  {
+    "id": 20009,
+    "priority": 1,
+    "action": { "type": "block" },
+    "condition": { "urlFilter": "rubiconproject.com", "resourceTypes": ["script","xmlhttprequest"] }
+  },
+  {
+    "id": 20010,
+    "priority": 1,
+    "action": { "type": "block" },
+    "condition": { "urlFilter": "linkby.com", "resourceTypes": ["script","xmlhttprequest"] }
+  },
+  {
+    "id": 20011,
+    "priority": 1,
+    "action": { "type": "block" },
+    "condition": { "urlFilter": "skimresources.com", "resourceTypes": ["script","xmlhttprequest"] }
+  },
+  {
+    "id": 20012,
+    "priority": 1,
+    "action": { "type": "block" },
+    "condition": { "urlFilter": "facebook.net", "resourceTypes": ["script","xmlhttprequest","image"] }
+  },
+  {
+    "id": 20013,
+    "priority": 1,
+    "action": { "type": "block" },
+    "condition": { "urlFilter": "connect.facebook.net", "resourceTypes": ["script","xmlhttprequest"] }
+  },
+  {
+    "id": 20014,
+    "priority": 1,
+    "action": { "type": "block" },
+    "condition": { "urlFilter": "analytics.twitter.com", "resourceTypes": ["script","xmlhttprequest"] }
+  },
+  {
+    "id": 20015,
+    "priority": 1,
+    "action": { "type": "block" },
+    "condition": { "urlFilter": "cdn.taboola.com", "resourceTypes": ["script","xmlhttprequest","image","sub_frame"] }
+  },
+  {
+    "id": 20016,
+    "priority": 1,
+    "action": { "type": "block" },
+    "condition": { "urlFilter": "c2.taboola.com", "resourceTypes": ["script","xmlhttprequest","image"] }
+  },
+  {
+    "id": 20017,
+    "priority": 1,
+    "action": { "type": "block" },
+    "condition": { "urlFilter": "scorecardresearch.com", "resourceTypes": ["script","image","xmlhttprequest"] }
+  },
+  {
+    "id": 20018,
+    "priority": 1,
+    "action": { "type": "block" },
+    "condition": { "urlFilter": "quantserve.com", "resourceTypes": ["script","xmlhttprequest","image"] }
+  },
+  {
+    "id": 20019,
+    "priority": 1,
+    "action": { "type": "block" },
+    "condition": { "urlFilter": "criteo.com", "resourceTypes": ["script","xmlhttprequest","image"] }
+  },
+  {
+    "id": 20020,
+    "priority": 1,
+    "action": { "type": "block" },
+    "condition": { "urlFilter": "outbrain.com", "resourceTypes": ["script","xmlhttprequest","image","sub_frame"] }
+  }
+]

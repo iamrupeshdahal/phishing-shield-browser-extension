@@ -1,0 +1,11 @@
+[
+  {
+    "id": 1001,
+    "priority": 1,
+    "action": { "type": "upgradeScheme" },
+    "condition": {
+      "urlFilter": "http://",
+      "resourceTypes": ["main_frame", "sub_frame"]
+    }
+  }
+]

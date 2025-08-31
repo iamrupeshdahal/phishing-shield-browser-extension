@@ -1,0 +1,11 @@
+[
+  {
+    "id": 5001,
+    "priority": 1,
+    "action": { "type": "block" },
+    "condition": {
+      "domainType": "thirdParty",
+      "resourceTypes": ["script","sub_frame"]
+    }
+  }
+]

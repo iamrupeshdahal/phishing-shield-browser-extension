@@ -1,0 +1,47 @@
+[
+  {
+    "id": 30001,
+    "priority": 1,
+    "action": { "type": "block" },
+    "condition": {
+      "urlFilter": "fingerprintjs",
+      "resourceTypes": ["script"]
+    }
+  },
+  {
+    "id": 30002,
+    "priority": 1,
+    "action": { "type": "block" },
+    "condition": {
+      "urlFilter": "clientjs",
+      "resourceTypes": ["script"]
+    }
+  },
+  {
+    "id": 30003,
+    "priority": 1,
+    "action": { "type": "block" },
+    "condition": {
+      "urlFilter": "id5-sync.com",
+      "resourceTypes": ["script","image","xmlhttprequest"]
+    }
+  },
+  {
+    "id": 30004,
+    "priority": 1,
+    "action": { "type": "block" },
+    "condition": {
+      "urlFilter": "krux.net",
+      "resourceTypes": ["script","xmlhttprequest"]
+    }
+  },
+  {
+    "id": 30005,
+    "priority": 1,
+    "action": { "type": "block" },
+    "condition": {
+      "urlFilter": "scorecardresearch.com",
+      "resourceTypes": ["script","image"]
+    }
+  }
+]

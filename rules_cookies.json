@@ -1,0 +1,30 @@
+[
+  {
+    "id": 4001,
+    "priority": 1,
+    "action": {
+      "type": "modifyHeaders",
+      "requestHeaders": [
+        { "header": "Cookie", "operation": "remove" }
+      ]
+    },
+    "condition": {
+      "domainType": "thirdParty",
+      "resourceTypes": ["sub_frame","script","image","xmlhttprequest","stylesheet","font","media","object","ping"]
+    }
+  },
+  {
+    "id": 4002,
+    "priority": 1,
+    "action": {
+      "type": "modifyHeaders",
+      "responseHeaders": [
+        { "header": "Set-Cookie", "operation": "remove" }
+      ]
+    },
+    "condition": {
+      "domainType": "thirdParty",
+      "resourceTypes": ["sub_frame","script","image","xmlhttprequest","stylesheet","font","media","object","ping"]
+    }
+  }
+]

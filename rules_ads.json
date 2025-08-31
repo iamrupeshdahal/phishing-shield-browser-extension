@@ -1,0 +1,14 @@
+[
+  {
+    "id": 10001,
+    "priority": 1,
+    "action": { "type": "block" },
+    "condition": { "urlFilter": "*doubleclick.net*", "resourceTypes": ["script","image","xmlhttprequest","sub_frame","other"] }
+  },
+  {
+    "id": 10002,
+    "priority": 1,
+    "action": { "type": "block" },
+    "condition": { "urlFilter": "*googlesyndication.com*", "resourceTypes": ["script","image","xmlhttprequest","sub_frame","other"] }
+  }
+]
