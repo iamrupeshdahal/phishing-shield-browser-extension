@@ -1,10 +1,19 @@
 {
   "manifest_version": 3,
-  "name": "Privacy Shield By Rupesh Dahal",
+  "name": "GBC Shield",
   "version": "1.0",
   "description": "Blocks ads and protects from phishing.",
-  "permissions": ["storage", "tabs", "scripting"],
+  "permissions": [
+    "storage",
+    "tabs",
+    "scripting",
+    "declarativeNetRequest",
+    "declarativeNetRequestFeedback"
+  ],
   "host_permissions": ["<all_urls>"],
+  "background": {
+    "service_worker": "bg.js"
+  },
   "action": {
     "default_popup": "popup.html",
     "default_icon": {
@@ -13,19 +22,32 @@
       "128": "icons/icon128.png"
     }
   },
+  "declarative_net_request": {
+    "rule_resources": [
+      { "id": "ads_default",    "enabled": true, "path": "rules_ads.json" },
+      { "id": "trackers_block", "enabled": true, "path": "rules_trackers.json" },
+      { "id": "https_upgrade",  "enabled": true, "path": "rules_https.json" },
+      { "id": "scripts_block",  "enabled": true, "path": "rules_scripts.json" },
+      { "id": "fp_block",       "enabled": true, "path": "rules_fp.json" },
+      { "id": "cookies_block",  "enabled": true, "path": "rules_cookies.json" }
+    ]
+  },
   "content_scripts": [
     {
       "matches": ["<all_urls>"],
-      "js": ["content.js"],
+      "js": ["ml.js", "content.js"],
       "run_at": "document_start"
     }
   ],
   "web_accessible_resources": [
-  {
-    "resources": ["phishing_list.json"],
-    "matches": ["<all_urls>"]
-  }
-],
+    {
+      "resources": [
+        "phishing_list.json",
+        "injected.js"
+      ],
+      "matches": ["<all_urls>"]
+    }
+  ],
   "icons": {
     "48": "icons/icon48.png",
     "128": "icons/icon128.png"
