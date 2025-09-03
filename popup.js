@@ -1,6 +1,4 @@
-// popup.js — consolidated + master-aware
 
-// ===== helpers =====
 const SELECTORS_TO_DISABLE = [
   '#ad-block', '#phishing', '#https', '#cookies',
   '#block-scripts', '#fingerprint', '#forget-site', '#mlEnabled'
@@ -32,7 +30,7 @@ function reloadActiveTab() {
   });
 }
 
-// ===== DNR ruleset toggles =====
+
 function applyAdBlockSetting(value, masterOn) {
   const enable = (value === 'enabled') && !!masterOn;
   chrome.declarativeNetRequest.updateEnabledRulesets({
@@ -73,7 +71,7 @@ function applyThirdPartyCookiesSetting(value, masterOn) {
   });
 }
 
-// ===== counters (new grouping) =====
+
 function updateCategoryCounters() {
   chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
     const tabId = tabs?.[0]?.id;
@@ -82,28 +80,27 @@ function updateCategoryCounters() {
     chrome.runtime.sendMessage({ type: 'getAllCountsForTab', tabId }, (resp) => {
       const c = resp?.counts || {};
 
-      // Ads + Trackers combined
+
       const elAT = document.getElementById('count-ads-trackers');
       if (elAT) elAT.textContent = (c.ads ?? 0) + (c.trackers ?? 0);
 
-      // Fingerprinting
+
       const elF = document.getElementById('count-fp');
       if (elF) elF.textContent = c.fp ?? 0;
 
-      // Scripts + Cookies combined
+
       const elSC = document.getElementById('count-scripts-cookies');
       if (elSC) elSC.textContent = (c.scripts ?? 0) + (c.cookies ?? 0);
 
-      // Phishing
+
       const elP = document.getElementById('count-phish');
       if (elP) elP.textContent = c.phish ?? 0;
     });
   });
 }
 
-// ===== main =====
+
 document.addEventListener('DOMContentLoaded', () => {
-  // elements
   const masterToggle = document.getElementById('shield-toggle');
   const statusText   = document.getElementById('status-text');
   const shieldLabel  = document.getElementById('shield-label');
@@ -114,7 +111,7 @@ document.addEventListener('DOMContentLoaded', () => {
     'forget-site','fingerprint','https','mlEnabled'
   ];
 
-  // hostname at top
+
   chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
     const urlDiv = document.getElementById('current-url');
     try {
@@ -125,29 +122,29 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // restore settings
+
   chrome.storage.local.get(ids.concat(['shield_master']), (data) => {
     const masterOn = (typeof data.shield_master === 'boolean') ? data.shield_master : true;
 
-    // master UI state
+
     masterToggle.classList.toggle('on', masterOn);
     masterToggle.querySelector('input').checked = masterOn;
     setBadge(shieldBadge, masterOn);
     setStatusLines(statusText, shieldLabel, masterOn);
     disableControls(!masterOn);
 
-    // restore each control value
+
     ids.forEach(id => {
       const el = document.getElementById(id);
       if (!el) return;
       let v = data[id];
-      if (id === 'mlEnabled' && v === undefined) v = true; // default ML = on
+      if (id === 'mlEnabled' && v === undefined) v = true;
       if (v === undefined) return;
       if (el.type === 'checkbox') el.checked = !!v;
       else el.value = v;
     });
 
-    // apply rulesets according to restored values + master
+
     const adSel     = document.getElementById('ad-block');
     const httpsSel  = document.getElementById('https');
     const scriptChk = document.getElementById('block-scripts');
@@ -160,11 +157,11 @@ document.addEventListener('DOMContentLoaded', () => {
     applyFingerprintSetting(fpChk ? fpChk.checked : false, masterOn);
     applyThirdPartyCookiesSetting(ckSel ? ckSel.value : 'disabled', masterOn);
 
-    // show counts on popup open
+
     updateCategoryCounters();
   });
 
-  // save & react to control changes (generic)
+
   ids.forEach(id => {
     const el = document.getElementById(id);
     if (!el) return;
@@ -175,7 +172,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
       const isOn = masterToggle.classList.contains('on');
 
-      // Apply DNR rules & reload when network-affecting settings change
+
       if (['ad-block','https','block-scripts','fingerprint','cookies'].includes(id)) {
         if (id === 'ad-block') applyAdBlockSetting(value, isOn);
         if (id === 'https') applyHttpsSetting(value, isOn);
@@ -189,21 +186,21 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // master toggle behaviour
+
   masterToggle.addEventListener('click', () => {
     const isOn = !masterToggle.classList.contains('on');
     masterToggle.classList.toggle('on', isOn);
     masterToggle.querySelector('input').checked = isOn;
 
-    // UI
+
     setBadge(shieldBadge, isOn);
     setStatusLines(statusText, shieldLabel, isOn);
     disableControls(!isOn);
 
-    // persist master
+
     chrome.storage.local.set({ shield_master: isOn });
 
-    // re-apply rulesets under new master state
+
     const adSel     = document.getElementById('ad-block');
     const httpsSel  = document.getElementById('https');
     const scriptChk = document.getElementById('block-scripts');
@@ -216,7 +213,6 @@ document.addEventListener('DOMContentLoaded', () => {
     applyFingerprintSetting(fpChk ? fpChk.checked : false, isOn);
     applyThirdPartyCookiesSetting(ckSel ? ckSel.value : 'disabled', isOn);
 
-    // reload so content.js & DNR take effect immediately, then refresh counters
     reloadActiveTab();
     setTimeout(() => { updateCategoryCounters(); }, 600);
   });

@@ -1,4 +1,4 @@
-// ml.js — lightweight logistic model (no TF.js needed)
+
 
 function extractFeaturesFromURL(fullUrl) {
   const u = new URL(fullUrl);
@@ -29,39 +29,39 @@ function extractFeaturesFromURL(fullUrl) {
 
   const norm = x => Math.min(1, x);
   return [
-    features.https,                          // 0
-    norm(features.url_len / 120),            // 1
-    norm(features.host_len / 60),            // 2
-    norm(features.path_len / 120),           // 3
-    norm(features.num_dots / 4),             // 4
-    norm(features.num_hyphens / 4),          // 5
-    norm(features.num_at / 2),               // 6
-    norm(features.num_digits / 6),           // 7
-    features.has_ip,                         // 8
-    features.has_keywords,                   // 9
-    features.suspicious_tld,                 // 10
-    norm(features.num_params / 5),           // 11
-    norm(features.num_encoded / 5),          // 12
+    features.https,                          
+    norm(features.url_len / 120),            
+    norm(features.host_len / 60),            
+    norm(features.path_len / 120),           
+    norm(features.num_dots / 4),             
+    norm(features.num_hyphens / 4),          
+    norm(features.num_at / 2),               
+    norm(features.num_digits / 6),           
+    features.has_ip,                         
+    features.has_keywords,                   
+    features.suspicious_tld,                
+    norm(features.num_params / 5),           
+    norm(features.num_encoded / 5),         
   ];
 }
 
 const WEIGHTS = [
-  -1.2,  // https
-   1.4,  // url_len
-   0.8,  // host_len
-   0.9,  // path_len
-   0.9,  // dots
-   1.1,  // hyphens
-   1.0,  // '@'
-   0.8,  // digits
-   1.5,  // IP host
-   1.3,  // phishing keywords
-   1.0,  // suspicious TLD
-   0.7,  // params
-   0.7   // encoded chars
+  -1.2,  
+   1.4,  
+   0.8,  
+   0.9,  
+   0.9,  
+   1.1,  
+   1.0, 
+   0.8, 
+   1.5, 
+   1.3, 
+   1.0,  
+   0.7,  
+   0.7  
 ];
 
-const BIAS = -1.0; // overall sensitivity knob
+const BIAS = -1.0; 
 
 function sigmoid(z){ return 1/(1+Math.exp(-z)); }
 
@@ -69,8 +69,8 @@ function scorePhishingURL(fullUrl){
   const x = extractFeaturesFromURL(fullUrl);
   let z = BIAS;
   for (let i=0;i<x.length;i++) z += x[i]*WEIGHTS[i];
-  return sigmoid(z); // 0..1
+  return sigmoid(z); 
 }
 
-// expose to content scripts
+
 window.__ps_scorePhishingURL = scorePhishingURL;

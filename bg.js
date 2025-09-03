@@ -1,10 +1,10 @@
-// bg.js — counters + fingerprint injection
+
 
 const RS_SCRIPTS = 'scripts_block';
 const RS_ADS     = 'ads_default';
 const RS_FP      = 'fp_block';
 
-// --- session storage helpers ---
+
 async function getCounts(tabId) {
   const key = `counts:${tabId}`;
   const { [key]: val } = await chrome.storage.session.get(key);
@@ -23,19 +23,19 @@ async function bump(tabId, field) {
   await setCounts(tabId, c);
 }
 
-// --- navigation reset ---
+
 chrome.tabs.onUpdated.addListener((tabId, changeInfo) => {
   if (changeInfo.status === 'loading' || changeInfo.url) {
     resetCounts(tabId);
   }
 });
 
-// --- cleanup ---
+
 chrome.tabs.onRemoved.addListener(async (tabId) => {
   await chrome.storage.session.remove(`counts:${tabId}`);
 });
 
-// --- DNR listener ---
+
 chrome.declarativeNetRequest.onRuleMatchedDebug.addListener(async (info) => {
   const tabId = info.tabId ?? (info.request && info.request.tabId);
   const ruleId = info.rule.ruleId;
@@ -54,7 +54,7 @@ chrome.declarativeNetRequest.onRuleMatchedDebug.addListener(async (info) => {
   }
 });
 
-// --- Live fallback ---
+
 function getLiveCountsFromMatched(tabId) {
   return new Promise((resolve) => {
     chrome.declarativeNetRequest.getMatchedRules({ tabId }, (res) => {
@@ -85,7 +85,7 @@ function getLiveCountsFromMatched(tabId) {
   });
 }
 
-// --- Messages ---
+
 chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
   if (msg?.type === 'getAllCountsForTab') {
     const tabId = sender?.tab?.id ?? msg.tabId;
@@ -106,7 +106,7 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
     let tabId = sender?.tab?.id ?? msg.tabId;
 
     if (!tabId) {
-      // fallback: ask for active tab
+
       chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
         if (tabs && tabs[0] && tabs[0].id) {
           bump(tabs[0].id, 'phish').then(() => sendResponse({ ok: true }));
@@ -114,14 +114,14 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
           sendResponse({ ok: false, error: "no tabId available" });
         }
       });
-      return true; // async
+      return true; 
     }
 
     bump(tabId, 'phish').then(() => sendResponse({ ok: true }));
     return true;
   }
 
-  // Fingerprinting injection
+
   if (msg?.type === 'inject-fp' && sender.tab?.id) {
     chrome.scripting.executeScript({
       target: { tabId: sender.tab.id },

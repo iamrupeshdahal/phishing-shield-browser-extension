@@ -25,7 +25,7 @@
       box-shadow:0 10px 24px rgba(0,0,0,.35)
     }
 
-    /* HEADER — stacked layout */
+
     .header{
       display:flex;
       flex-direction:column;
@@ -58,7 +58,7 @@
       white-space:nowrap;
     }
 
-    /* Shields row */
+
     .shield-row{
       width:100%;
       display:flex;
@@ -83,7 +83,7 @@
     .sub{color:var(--muted);font-size:12px;padding:0 16px 12px}
     .sep{height:1px;background:var(--border);margin:8px 0}
 
-    /* Controls */
+
     .section{padding:10px 16px}
     .row{display:flex;align-items:center;justify-content:space-between;margin:10px 0}
     .label{color:#dfe4ee}
@@ -96,19 +96,19 @@
     .switch input{accent-color:var(--accent)}
 
 .accordion { border-top:1px solid var(--border); }
-.accordion > summary { list-style:none; }             /* hide default marker */
+.accordion > summary { list-style:none; }          
 .accordion > summary::-webkit-details-marker{display:none}
 
 .acc-head{display:flex;align-items:center;justify-content:space-between;padding:12px 16px;cursor:pointer}
 .chev{transform:rotate(0deg);transition:.2s}
 
 .accordion .acc-body{display:none}
-.accordion[open] .acc-body{display:block}            /* shown when open */
-.accordion[open] .chev{transform:rotate(90deg)}      /* rotate arrow */
+.accordion[open] .acc-body{display:block}           
+.accordion[open] .chev{transform:rotate(90deg)}     
 
 
 
-    /* Footer */
+
     .footer{display:flex;justify-content:space-between;padding:12px 16px;font-size:12px;color:var(--muted)}
   </style>
 </head>
@@ -116,7 +116,7 @@
   <div class="wrap">
     <div class="card">
 
-      <!-- Header (stacked) -->
+
       <div class="header">
         <div id="current-url">loading…</div>
 
@@ -138,7 +138,7 @@
       <div class="sub">If this site seems broken, try Shields down. Note: this may reduce Privacy Shield protections.</div>
 
         <div class="sep"></div>
-          <!-- Blocked counters -->
+
           <div class="section" id="blocked-metrics" style="padding-top:0;">
             <div class="metrics" style="display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-bottom:8px;">
 
@@ -165,7 +165,7 @@
             </div>
           </div>
 
-      <!-- Quick Controls -->
+
       <div class="section">
         <div class="row"><div class="label">Block trackers & ads</div>
           <select id="ad-block">
@@ -204,28 +204,28 @@
     </div>
   </div>
 
-  <!-- Your existing popup logic (storage, hostname, etc.) -->
+
   <script src="popup.js"></script>
 
-  <!-- Master toggle + status text behaviour -->
+
   <script>
     const shield = document.getElementById('shield-toggle');
     const statusText = document.getElementById('status-text');
     const shieldLabel = document.getElementById('shield-label');
 
     function applyMaster(isOn){
-      // Text lines
+
       statusText.textContent = isOn
         ? 'Your browsing experience is protected.'
         : 'Not protected by GBC Shields 1.0';
       shieldLabel.textContent = isOn ? 'Shields are UP' : 'Shields are DOWN';
 
-      // Enable/disable controls
+
       const controls = '#ad-block, #phishing, #https, #cookies, #block-scripts, #fingerprint, #forget-site, #mlEnabled';
       document.querySelectorAll(controls).forEach(el => { el.disabled = !isOn; });
     }
 
-    // Load master state
+
     chrome?.storage?.local?.get?.(['shield_master'], d => {
       const isOn = d?.shield_master ?? true;
       if (!isOn) shield.classList.remove('on');
@@ -233,7 +233,7 @@
       applyMaster(isOn);
     });
 
-    // Click handler
+
     shield.addEventListener('click', () => {
       shield.classList.toggle('on');
       const isOn = shield.classList.contains('on');
@@ -242,7 +242,7 @@
       applyMaster(isOn);
     });
 
-    // Simple accordion (optional)
+
     const head = document.getElementById('acc-head');
     const body = document.getElementById('acc-body');
     head.addEventListener('click', () => {
